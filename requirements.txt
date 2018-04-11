@@ -1,0 +1,4 @@
+flask
+flask_restful
+flask_jwt
+Flask-SQLAlchemy==2.1
