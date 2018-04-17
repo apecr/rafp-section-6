@@ -11,7 +11,7 @@ class Store(Resource):
                         help='This filed cannot be left blank')
 
     def get(self, name):
-        store = StoreModel.find_by_name(name).json()
+        store = StoreModel.find_by_name(name)
         if not store:
             return {'message': 'Store not found'}, 404
         return store.json()
