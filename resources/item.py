@@ -11,6 +11,10 @@ class Item(Resource):
                         type=float,
                         required=True,
                         help='This filed cannot be left blank')
+    parser.add_argument('store_id',
+                        type=int,
+                        required=True,
+                        help='Every item needs a store id')
 
     @jwt_required()
     def get(self, name):
@@ -25,7 +29,7 @@ class Item(Resource):
             return {'message': 'item {} already created'.format(name)}, 400
 
         data = Item.parser.parse_args()
-        item = ItemModel(name=name, price=data['price'])
+        item = ItemModel(name=name, **data)
 
         try:
             item.save_to_db()
@@ -46,9 +50,10 @@ class Item(Resource):
 
         item = ItemModel.find_by_name(name)
         if not item:
-            item = ItemModel(name, data['price'])
+            item = ItemModel(name, **data)
         else:
             item.price = data['price']
+            item.store_id = data['store_id']
 
         item.save_to_db()
         return item.json()

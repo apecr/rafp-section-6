@@ -8,7 +8,7 @@
   },
   "scripts": {
     "install": "source venv/bin/activate && pip install -r requirements.txt",
-    "start": "npm install && rm -rf data.db && python create_tables.py && python app.py"
+    "start": "npm install && rm   -rf data.db && python app.py"
   },
   "repository": {
     "type": "git",
